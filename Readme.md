@@ -60,35 +60,6 @@ Nomeie como: meu-bucket (ou outro nome que preferir)
 
 Use este nome nos caminhos do Spark com s3a://meu-bucket/
 
-✍️ Exemplo: lendo e escrevendo arquivos Delta com Spark
-Abra um notebook Jupyter e execute:
-
-from pyspark.sql import SparkSession
-
-# Sessão Spark com configuração S3A (MinIO)
-spark = (
-    SparkSession.builder.appName("DeltaS3Example")
-    .config("spark.hadoop.fs.s3a.endpoint", "http://minio:9000")
-    .config("spark.hadoop.fs.s3a.access.key", "minioadmin")
-    .config("spark.hadoop.fs.s3a.secret.key", "minioadmin")
-    .config("spark.hadoop.fs.s3a.path.style.access", "true")
-    .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
-    .getOrCreate()
-)
-
-# Criar DataFrame
-df = spark.createDataFrame([
-    ("João", 28),
-    ("Maria", 34),
-    ("Carlos", 41)
-], ["nome", "idade"])
-
-# Salvar no MinIO em formato Delta
-df.write.format("delta").mode("overwrite").save("s3a://meu-bucket/delta/clientes")
-
-# Ler o mesmo arquivo Delta
-df_lido = spark.read.format("delta").load("s3a://meu-bucket/delta/clientes")
-df_lido.show()
 
 🔐 Segurança
 Este ambiente é projetado para uso local apenas. Para facilitar as senhas estão em hardcode (Não replicar em ambientes de produção)
