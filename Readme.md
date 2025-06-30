@@ -62,7 +62,7 @@ Use este nome nos caminhos do Spark com s3a://meu-bucket/
 
 
 🔐 Segurança
-Este ambiente é projetado para uso local apenas. Para facilitar as senhas estão em hardcode (Não replicar em ambientes de produção)
+Este ambiente é projetado para uso local para estudos apenas. Para facilitar as senhas estão em hardcode (Não replicar em ambientes de produção)
 
 
 
